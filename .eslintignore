@@ -1,0 +1,6 @@
+# ignore html directory
+**/html
+# ignore node_modules directory
+**/node_modules
+# ignore dist directory
+**/dist

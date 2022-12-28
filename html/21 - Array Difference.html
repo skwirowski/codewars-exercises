@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Array Difference</title>
+  </head>
+
+  <body>
+    <p>
+      <b>Description:</b>
+      <br />
+      Your goal in this kata is to implement a difference function, which subtracts one list from another and returns
+      the result.
+      <br />
+      <br />
+      It should remove all values from list <b>a</b>, which are present in list <b>b</b>.
+    </p>
+    <pre>
+    array_diff([1,2],[1]) == [2]
+  </pre
+    >
+    <p>If a value is present in <b>b</b>, all of its occurrences must be removed from the other:</p>
+    <pre>
+    array_diff([1,2,2,2,3],[2]) == [1,3]
+  </pre
+    >
+
+    <script>
+      const exA = [1, 2, 2, 2, 3]; // Example array a
+      const exB = [2, 1]; // Example array b
+
+      const array_diff = (a, b) => {
+        let newArray = a;
+        for (let i = 0; i < b.length; i += 1) {
+          newArray = newArray.filter((val) => val !== b[i]);
+        }
+        return newArray;
+      };
+
+      console.log(array_diff(exA, exB));
+
+      // My favorite solutions from codewars
+      //
+      //function array_diff(a, b) {
+      // return a.filter(function (x) { return b.indexOf(x) == -1; });
+      // }
+      //
+      // function array_diff(a, b) {
+      //     return a.filter(function (v) { return b.indexOf(v) === -1 });
+      //   }
+    </script>
+  </body>
+</html>

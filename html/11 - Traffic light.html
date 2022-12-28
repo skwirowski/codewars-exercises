@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Traffic light</title>
+  </head>
+  <body>
+    <p>
+      Description:
+      <br />
+      <br />
+      You're writing code to control your town's traffic lights. You need a function to handle each change from
+      <b>green</b>, to <b>yellow</b>, to <b>red</b>, and then to <b>green</b> again.
+      <br />
+      <br />
+      Complete the function that takes a string as an argument representing the current state of the light and returns a
+      string representing the state the light should change to.
+    </p>
+    <p>
+      For example:
+    </p>
+    <pre>
+    update_light('green') should return 'yellow'.
+  </pre
+    >
+
+    <script>
+      function updateLight(current) {
+        let nextLight;
+        switch (current) {
+          case 'green':
+            nextLight = 'yellow';
+            break;
+          case 'yellow':
+            nextLight = 'red';
+            break;
+          case 'red':
+            nextLight = 'green';
+            break;
+          default:
+            nextLight = 'red';
+        }
+        return nextLight;
+      }
+    </script>
+  </body>
+</html>

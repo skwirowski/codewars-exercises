@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sort and Star</title>
+  </head>
+  <body>
+    <p>
+      <b>Description:</b>
+      <br />
+      You will be given an vector of string(s). You must sort it alphabetically (case-sensitive!!) and then return the
+      first value.
+      <br />
+      The returned value must be a string, and have <b>"***"</b> between each of its letters.
+      <br />
+      You should not remove or add elements from/to the array.
+    </p>
+
+    <script>
+      // Example array
+      const exampleArray = ['take', 'over', 'the', 'world', 'maybe', 'who', 'knows', 'bitcoin', 'perhaps'];
+      const sortAlphabetically = (arr) =>
+        arr.sort((a, b) => {
+          if (a < b) return -1;
+          if (a > b) return 1;
+          return 0;
+        });
+
+      const addAsterisks = (str) => {
+        let newString = '';
+        for (let i = 0; i < str.length; i += 1) {
+          const newVal = `${str.charAt(i)}***`;
+          newString += newVal;
+        }
+        return newString.slice(0, -3);
+      };
+
+      function twoSort(s) {
+        const sortedArray = sortAlphabetically(s);
+        return addAsterisks(sortedArray[0]);
+      }
+      console.log(sortAlphabetically(exampleArray));
+      console.log(twoSort(exampleArray));
+
+      // My favorite solutions from codewars
+      //
+      // function twoSort(s) {
+      //   return s.sort()[0].split('').join('***');
+      // }
+    </script>
+  </body>
+</html>

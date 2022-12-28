@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Maximum Multiple</title>
+  </head>
+  <body>
+    <p>
+      <b>Given a Divisor and a Bound</b>, Find the largest integer N , Such That,
+      <br />
+      <br />
+      <b>Conditions:</b>
+      <br />
+    </p>
+    <ul>
+      <li>N is divisible by divisor</li>
+      <li>N is less than or equal to bound</li>
+      <li>N is greater than 0.</li>
+    </ul>
+    <p>
+      <b>Notes:</b>
+    </p>
+    <ul>
+      <li>The parameters <b>(divisor, bound)</b> passed to the function are only positive values .</li>
+      <li>It's guaranteed that a <b>divisor is Found</b>.</li>
+      <li>N is greater than 0.</li>
+    </ul>
+    <p>
+      <b>EXAMPLES:</b>
+      <br />
+    </p>
+    <ul>
+      <li>
+        <pre>1- maxMultiple (2,7) ==> return (6)</pre>
+        Explanation: <b>(6)</b> is divisible by <b>(2)</b> , <b>(6)</b> is less than or equal to bound <b>(7)</b> , and
+        <b>(6)</b> is > <b>0</b>.
+      </li>
+      <li>
+        <pre>2- maxMultiple (10,50)  ==> return (50)</pre>
+        Explanation: <b>(50)</b> is divisible by <b>(10)</b> , <b>(50)</b> is less than or equal to bound <b>(50)</b> ,
+        and <b>(50)</b> is > <b>0</b>.
+      </li>
+      <li>
+        <pre>3- maxMultiple (37,200) ==> return (185)</pre>
+        Explanation: <b>(185)</b> is divisible by <b>(37)</b> , <b>(185)</b> is less than or equal to bound
+        <b>(200)</b> , and <b>(185)</b> is > <b>0</b>.
+      </li>
+    </ul>
+
+    <script src="script.js">
+      function maxMultiple(divisor, bound) {
+        const reminder = bound % divisor;
+        if (divisor > bound) {
+          return 0;
+        }
+        return bound - reminder;
+      }
+      maxMultiple(2, 7);
+
+      // My favorite solutions from codewars
+      //
+      // function maxMultiple(divisor, bound){
+      //   return bound-bound%divisor
+      // }
+    </script>
+  </body>
+</html>

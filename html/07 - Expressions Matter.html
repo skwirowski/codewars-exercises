@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Expressions Matter</title>
+  </head>
+  <body>
+    <p>
+      Given three integers <b>a ,b ,c,</b> return the largest number obtained after inserting the following operators
+      and brackets: <b>+, *, ()</b>.
+      <br />
+      <br />
+      <b>Consider an Example:</b>
+      <br />
+      With the numbers are <b>1</b>, <b>2</b> and <b>3</b> , here are some ways of placing signs and brackets:
+    </p>
+    <ul>
+      <li><pre>1 * (2 + 3) = 5</pre></li>
+      <li><pre>1 * 2 * 3 = 6</pre></li>
+      <li><pre>1 + 2 * 3 = 7</pre></li>
+      <li><pre>(1 + 2) * 3 = 9</pre></li>
+    </ul>
+    <p>
+      So the maximum value that you can obtain is 9.
+    </p>
+    <p>
+      Notes
+    </p>
+    <ul>
+      <li>The numbers are always <b>positive</b>.</li>
+      <li>The numbers are in the range <b>(1  ≤  a, b, c  ≤  10)</b>.</li>
+      <li>It's not necessary to place all the signs and brackets.</li>
+      <li><b>Repetition</b> in numbers may occur.</li>
+      <li>
+        You <b>cannot swap the operands</b>. For instance, in the given example you cannot get expression
+        <pre>(1 + 3) * 2 = 8</pre>
+      </li>
+    </ul>
+
+    <p>
+      <b>EXAMPLES:</b>
+      <br />
+    </p>
+    <ul>
+      <li>
+        <pre>1- expressionsMatter(1,2,3)  ==>  return 9</pre>
+        Explanation: After placing signs and brackets, the Maximum value obtained from the expression
+        <pre>(1+2) * 3 = 9</pre>
+      </li>
+      <li>
+        <pre>2- expressionsMatter(1,1,1)  ==>  return 3</pre>
+        Explanation: After placing signs, the Maximum value obtained from the expression is
+        <pre>1 + 1 + 1 = 3</pre>
+      </li>
+      <li>
+        <pre>3- expressionsMatter(9,1,1)  ==>  return 18</pre>
+        Explanation: After placing signs and brackets, the Maximum value obtained from the expression is
+        <pre>9 * (1+1) = 18</pre>
+      </li>
+    </ul>
+
+    <script>
+      const sortArrayAscending = (array) => array.sort((a, b) => a - b);
+
+      function expressionMatter(a, b, c) {
+        const firstExpression = a + b + c;
+        const secondExpression = a * b * c;
+        const thirdExpression = (a + b) * c;
+        const fourthExpression = a * (b + c);
+        const fifthExpression = a + b * c;
+        const sixthExpression = a * b + c;
+        const arrayOfValues = [
+          firstExpression,
+          secondExpression,
+          thirdExpression,
+          fourthExpression,
+          fifthExpression,
+          sixthExpression,
+        ];
+        const sortedArrayOfValues = sortArrayAscending(arrayOfValues);
+        const maximumValue = sortedArrayOfValues.slice(-1);
+        return maximumValue[0];
+      }
+      expressionMatter(5, 10, 2);
+
+      // My favorite solutions from codewars
+      //
+      // function expressionMatter(a, b, c) {
+      //   return Math.max(
+      //     a + b + c,
+      //     a * b * c,
+      //     a * (b + c),
+      //     (a + b) * c,
+      //     a + b * c,
+      //     a * b + c,
+      //   );
+      // }
+    </script>
+  </body>
+</html>

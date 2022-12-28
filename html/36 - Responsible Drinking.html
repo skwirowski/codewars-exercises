@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Responsible Drinking</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="">
+</head>
+
+<body>
+  <pre>
+    Welcome to the Codewars Bar!
+
+    Codewars Bar recommends you drink 1 glass of water per standard drink so you're not hungover tomorrow morning.
+    Your fellow coders have bought you several drinks tonight in the form of a string. Return a string suggesting how many glasses of water you should drink to not be hungover.
+
+    Examples
+    "1 beer"  =>  "1 glass of water"
+    "1 shot, 5 beers and 1 glass of wine"  =>  "7 glasses of water"
+
+    Notes
+    To keep the things simple, we'll consider that anything with a number in front of it is a drink: "1 bear" => "1 glass of water" or "1 chainsaw and 2 pools" => "3 glasses of water"
+    The number in front of each drink lies in range [1; 9]
+  </pre>
+  <script>
+
+    const hydrate = (s) => {
+      const drinksQuantity = s.match(/[1-9]/g).reduce((tot, curr) => tot + Number(curr), 0);
+      return `${drinksQuantity} ${drinksQuantity > 1 ? 'glasses' : 'glass'} of water`;
+    };
+
+    function hydrate(s) {
+      //* Arrange
+      const digitsRegEx = /[1-9]/g;
+      const createArrayOfMatchedStrings = (string, regularEx) => string.match(regularEx);
+      const transformStringToNumber = (string) => Number(string);
+      const changeArrayOfStringsToArrayOfNumbers = (array, transformationCallback) => {
+        return array.map((item) => transformationCallback(item));
+      };
+      const sumOfArrayItems = (array) => array.reduce((total, current) => total + current, 0);
+      const getResultDependingOnCondition = (condition, ifTrue, ifFalse) =>
+        condition ? ifTrue : ifFalse;
+
+      //* Act
+      const getDrinksFromDescription = createArrayOfMatchedStrings(s, digitsRegEx);
+      const transformDrinksStringsToDigits = changeArrayOfStringsToArrayOfNumbers(
+        getDrinksFromDescription,
+        transformStringToNumber,
+      );
+      const totalDrinksQuantity = sumOfArrayItems(transformDrinksStringsToDigits);
+      const wordRightForm = getResultDependingOnCondition(
+        totalDrinksQuantity === 1,
+        'glass',
+        'glasses',
+      );
+
+      //* Resolve
+      const getHydrationRecommendation = `${totalDrinksQuantity} ${wordRightForm} of water`;
+
+      return getHydrationRecommendation;
+    }
+
+  </script>
+</body>
+
+</html>

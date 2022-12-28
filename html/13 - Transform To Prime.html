@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Transform To Prime</title>
+  </head>
+  <body>
+    <p>
+      <b>Task:</b>
+      <br />
+      <b>Given</b> a List [] of n integers , <b>find minimum number</b> to be inserted in a list, so that
+      <b>sum of all elements of list should equal the closest prime number</b>.
+    </p>
+    <p>
+      <b>Notes:</b>
+    </p>
+    <ul>
+      <li>List size is at least 2.</li>
+      <li>List's numbers will only positives (n > 0).</li>
+      <li>Repetition of numbers in the list could occur.</li>
+      <li>The newer list's sum should equal the closest prime number.</li>
+    </ul>
+    <p>
+      <b>Input >> Output Examples:</b>
+    </p>
+    <pre>1- minimumNumber ({3,1,2}) ==> return (1)</pre>
+    <p>
+      <b>Explanation:</b>
+      <br />
+      Since , the sum of the list's elements equal to (6) , the minimum number to be inserted to transform the sum to
+      prime number is (1) , which will make the sum of the List equal the closest prime number (7).
+    </p>
+    <pre>2-  minimumNumber ({2,12,8,4,6}) ==> return (5)</pre>
+    <p>
+      <b>Explanation:</b>
+      <br />
+      Since , the sum of the list's elements equal to (32) , the minimum number to be inserted to transform the sum to
+      prime number is (5) , which will make the sum of the List equal the closest prime number (37).
+    </p>
+    <pre>3- minimumNumber ({50,39,49,6,17,28}) ==> return (2)</pre>
+    <p>
+      <b>Explanation:</b>
+      <br />
+      Since , the sum of the list's elements equal to (189) , the minimum number to be inserted to transform the sum to
+      prime number is (2) , which will make the sum of the List equal the closest prime number (191).
+    </p>
+
+    <script>
+      const exampleArray = [50, 39, 49, 6, 17, 28];
+      const isPrime = (num) => {
+        if (num <= 1) {
+          return true;
+        }
+        if (num <= 3) {
+          return true;
+        }
+        if (num % 2 === 0 || num % 3 === 0) {
+          return false;
+        }
+        let i = 5;
+        while (i * i <= num) {
+          if (num % i === 0 || num % (i + 2) === 0) {
+            return false;
+          }
+          i += 6;
+        }
+        return true;
+      };
+
+      function minimumNumber(numbers) {
+        let sumOfNumbers = numbers.reduce((prev, curr) => prev + curr, 0);
+        let counter = 0;
+        while (!isPrime(sumOfNumbers)) {
+          sumOfNumbers += 1;
+          counter += 1;
+        }
+        return counter;
+      }
+      console.log(minimumNumber(exampleArray));
+      // My favorite solutions from codewars
+      //
+      // function minimumNumber(numbers){
+      //   let sum = numbers.reduce((a,b) => a + b)
+      //   for(let i = sum; ; i++) {
+      //     if(prime(i)) return i - sum
+      //   }
+      //   function prime(a) {
+      //     if(a < 2) return false
+      //     if(a % 2 === 0) return a === 2
+      //     for(let i = 3; i * i <= a; i += 2) {
+      //       if(a % i === 0) return false
+      //     }
+      //     return true
+      //   }
+      // }
+    </script>
+  </body>
+</html>

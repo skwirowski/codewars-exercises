@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sum of numerous arguments</title>
+  </head>
+  <body>
+    <p>
+      After calling the function <b>findSum()</b> with any number of non-negative integer arguments, it should return
+      the sum of all those arguments. If no arguments are given, the function should return 0, if negative arguments are
+      given, it should return -1.
+    </p>
+    <p>
+      For example:
+    </p>
+    <pre>
+    findSum(1,2,3,4); // returns 10
+    findSum(1,-2);    // returns -1
+    findSum();        // returns 0
+    </pre>
+    <p>
+      <b>Hint:</b>
+      <br />
+      research the arguments object on google or read Chapter 4 from Eloquent Javascript
+    </p>
+    <script>
+      function findSum(...theArgs) {
+        const negativeArguments = theArgs.filter((element) => element < 0);
+        if (negativeArguments.length === 0) {
+          return theArgs.reduce((prev, curr) => prev + curr, 0);
+        }
+        return -1;
+      }
+      console.log(findSum());
+
+      // My favorite solutions from codewars
+      //
+      // function findSum(...nums) {
+      //   return nums.reduce((a, b) => a < 0 || b < 0 ? - 1 : a + b, 0)
+      // }
+    </script>
+  </body>
+</html>

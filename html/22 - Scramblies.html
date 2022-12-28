@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Scramblies</title>
+  </head>
+  <body>
+    <p>
+      <b>Description:</b>
+      <br />
+      <br />
+      Complete the function <b>scramble(str1, str2)</b> that returns <b>true</b> if a portion of <b>str1</b> characters
+      can be rearranged to match <b>str2</b>, otherwise returns <b>false</b>.
+    </p>
+    <p>
+      <b>Notes:</b>
+    </p>
+    <ul>
+      <li>Only lower case letters will be used (a-z). No punctuation or digits will be included.</li>
+      <li>Performance needs to be considered.</li>
+    </ul>
+    <p>
+      <b>Examples:</b>
+    </p>
+    <pre>scramble('rkqodlw', 'world') ==> True</pre>
+    <pre>scramble('cedewaraaossoqqyt', 'codewars') ==> True</pre>
+    <pre>scramble('katas', 'steak') ==> False</pre>
+
+    <script>
+      // Example strings
+      const exStr1 = 'katas';
+      const exStr2 = 'steak';
+
+      const scramble = (str1, str2) => {
+        let canRearrange;
+        for (let i = 0; i < str2.length; i += 1) {
+          const char = str2.charAt(i);
+          const regExp = new RegExp(char, 'g');
+          /*
+           * Compare how many times each character occurs in the base string (str2 - string to check for)
+           * and in compared string (str1 - string to be checked). If character occurs in str1 at least
+           * as many times as in str2, then loop iteration returns canRearrange = true. Otherwise loop
+           * iteration returns canRearrange = false and immediately breaks loop (jump out of the loop).
+           */
+          const occur1 = (str1.match(regExp) || []).length;
+          const occur2 = (str2.match(regExp) || []).length;
+          if (occur1 >= occur2) {
+            canRearrange = true;
+          } else {
+            canRearrange = false;
+            break;
+          }
+        }
+        return canRearrange;
+      };
+
+      console.log(scramble(exStr1, exStr2));
+    </script>
+  </body>
+</html>

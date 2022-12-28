@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Digital cypher vol. 3</title>
+  </head>
+  <body>
+    <p>
+      <b>Description:</b>
+      <br />
+      <br />
+      Digital Cypher assigns to each letter of the alphabet unique number. For example:
+    </p>
+    <pre>
+  a  b  c  d  e  f  g  h  i  j  k  l  m
+  1  2  3  4  5  6  7  8  9 10 11 12 13
+  n  o  p  q  r  s  t  u  v  w  x  y  z
+  14 15 16 17 18 19 20 21 22 23 24 25 26
+</pre
+    >
+    <p>Instead of letters in encrypted word we write the corresponding number, eg. The word scout:</p>
+    <pre>
+  s  c  o  u  t
+  19  3 15 21 20
+</pre
+    >
+    <p>
+      Then we add to each obtained digit consecutive digits from the key. For example. In case of key equal to
+      <i>1939</i> :
+    </p>
+    <pre>
+  s   c   o   u   t
+  19  3  15  21  20
++ 1   9   3   9   1
+---------------
+  20 12 18 30 21
+
+  m   a   s   t   e   r   p  i  e  c  e
+  13  1  19  20   5  18  16  9  5  3  5
++ 1   9   3   9   1   9   3  9  1  9  3
+  --------------------------------
+  14 10 22 29  6 27 19 18  6  12 8
+</pre
+    >
+    <p>
+      <b>Task:</b>
+      <br />
+      Write a function that accepts a <i>message</i> string and an array of integers <i>code</i>. As the result, return
+      the <i>key</i> that was used to encrypt the <i>message</i>. The <i>key</i> has to be shortest of all possible keys
+      that can be used to code the <i>message</i>: i.e. when the possible keys are <i>12</i> , <i>1212</i>,
+      <i>121212</i>, your solution should return <i>12</i>.
+      <br />
+      <br />
+      <b>Input / Output:</b>
+      <br />
+      The <i>message</i> is a string containing only lowercase letters.
+      <br />
+      The <i>code</i> is a array of positive integers.
+      <br />
+      The <i>key</i> input number is a positive integer.
+    </p>
+    <p>
+      <b>Example:</b>
+    </p>
+    <pre>
+findTheKey("scout", [20, 12, 18, 30, 21]);  =>  1939
+findTheKey("masterpiece", [14, 10, 22, 29, 6, 27, 19, 18, 6, 12, 8]);  =>  1939
+findTheKey("nomoretears", [15, 17, 14, 17, 19, 7, 21, 7, 2, 20, 20]);  =>  12
+</pre
+    >
+    <script>
+      const exStr = 'scout';
+      const exCode = [20, 12, 18, 30, 21];
+
+      const findTheKeyArr = (message, code) => {
+        return [...message].map((item, index) => code[index] - item.charCodeAt(0) + 96);
+      };
+
+      const checkKey = (code, message, key) => {
+        let resultKey;
+        for (let i = 0; i <= message.length; i += 1) {
+          const keyArr = key.slice(0, i);
+          const word = String.fromCharCode(
+            ...code.map((item, index) => item - Number(keyArr[index % keyArr.length]) + 96)
+          );
+          resultKey = keyArr;
+          if (word === message) {
+            break;
+          }
+        }
+        return Number(resultKey.join(''));
+      };
+
+      const findTheKey = (message, code) => {
+        const keyArr = findTheKeyArr(message, code);
+        return checkKey(code, message, keyArr);
+      };
+
+      console.log(findTheKey(exStr, exCode));
+
+      // My favorite solutions from codewars
+      //
+      // const findTheKey=(message, code)=>{
+      //   var keyArr = message.split("").map((d,i)=>code[i]-d.charCodeAt()+96);
+      //   var keyStr = keyArr.join("");
+      //   for(let i=1; i<keyStr.length; i++) {
+      //     let supKey = keyStr.slice(0,i);
+      //     let str = keyStr.replace(new RegExp(supKey,"g"),"");
+      //     if(supKey.indexOf(str)===0)
+      //       return Number(supKey);
+      //   }
+      //   return Number(keyStr);
+      // }
+      //
+      //
+      // findTheKey=(message, code)=>{
+      //   var prt = message.split("").map((i,j)=>code[j]-i.charCodeAt(0)+96)
+      //   for (var j = 1; j <= prt.length; j++){
+      //     var k = prt.slice(0,j).join("")
+      //     var l =  Math.ceil(parseFloat(prt.length/k.length))
+      //     if (k.repeat(l).split("").slice(0,prt.length).join("")==prt.join("")){
+      //       return parseInt(k)
+      //     }
+      //   }
+      // }
+    </script>
+  </body>
+</html>

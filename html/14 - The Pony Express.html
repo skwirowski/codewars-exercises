@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>The Pony Express</title>
+  </head>
+  <body>
+    <p>
+      <b>A History Lesson</b>
+      <br />
+      The Pony Express was a mail service operating in the US in 1859-60. It reduced the time for messages to travel
+      between the Atlantic and Pacific coasts to about 10 days, before it was made obsolete by the transcontinental
+      telegraph.
+    </p>
+    <p>
+      <b>How it worked</b>
+      <br />
+      There were a number of stations, where:
+    </p>
+    <ul>
+      <li>The rider switched to a fresh horse and carried on, or</li>
+      <li>The mail bag was handed over to the next rider</li>
+    </ul>
+    <p>
+      <b>Kata Task</b>
+      <br />
+      stations is a list/array of distances (miles) from one station to the next along the Pony Express route.
+      <br />
+      Implement the riders method/function, to return how many riders are necessary to get the mail from one end to the
+      other.
+    </p>
+    <p><b>NOTE:</b> Each rider travels as far as he can, but never more than 100 miles.</p>
+
+    <script>
+      const exampleArray = [10, 20, 34, 36, 34, 23, 21, 20, 45, 29, 7, 35, 31];
+
+      function riders(stations) {
+        let counter = 1;
+        let distance = 0;
+        for (let i = 0; i < stations.length; i += 1) {
+          distance += stations[i];
+          if (distance > 100) {
+            counter += 1;
+            distance = stations[i];
+          }
+        }
+        return counter;
+      }
+
+      console.log(riders(exampleArray));
+    </script>
+  </body>
+</html>

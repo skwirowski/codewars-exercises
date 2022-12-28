@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sorting by bits</title>
+  </head>
+  <body>
+    <p>
+      <b>Description:</b>
+      <br />
+      <br />
+      In this kata you're expected to sort an array of 32-bit integers in ascending order of the number of on bits they
+      have. For example:
+    </p>
+    <pre>
+  Given the array [7, 6, 15, 8]
+</pre
+    >
+    <ul>
+      <li>7 has <b>3 on bits</b> (000...0111)</li>
+      <li>6 has <b>2 on bits</b> (000...0011)</li>
+      <li>15 has <b>4 on bits</b> (000...1111)</li>
+      <li>8 has <b>1 on bit</b> (000...1000)</li>
+    </ul>
+    <p>
+      So the array in sorted order would be <b>[8, 6, 7, 15]</b>. <br /><br />
+      In cases where two numbers have the same number of bits, compare their real values instead.
+      <br /><br />
+      E.g between 10 (...1010) and 12 (...1100), they both have the same number of on bits '2' but the integer 10 is
+      less than 12 so it comes first in sorted order.
+      <br /><br />
+      Your task is to write the function sortBybit() that takes an array of integers and sort them as described above.
+      <br /><br />
+      Note: Your function should modify the input rather than creating a new array.
+    </p>
+    <pre>
+  sortByBit([3, 8, 3, 6, 5, 7, 9, 1]) // => [1, 8, 3, 3, 5, 6, 9, 7]
+</pre
+    >
+    <h2>
+      I solved this kata mostly thanks to this post
+      <a href="https://www.geeksforgeeks.org/sort-array-according-count-set-bits/"
+        >Geeks for Geeks "Sort an array according to count of set bits "</a
+      >
+    </h2>
+
+    <script>
+      const exampleArray = [9, 4, 5, 3, 5, 7, 2, 56, 8, 2, 6, 8, 0];
+
+      // utility function that returns total set bits count in an integer
+      const countBits = (binaryNumberInString) => {
+        const onBitsCount = binaryNumberInString.match(/1/g);
+        return onBitsCount ? onBitsCount.length : 0;
+      };
+
+      // function to simultaneously sort both arrays using insertion sort
+      // arr - input numbers array
+      // auxArr - auxiliary array with set bits count
+      const insertionSort = (arr, auxArr = arr) => {
+        for (let i = 1; i < arr.length; i += 1) {
+          // use 2 keys because we need to sort both arrays simultaneously
+          const key1 = auxArr[i];
+          const key2 = arr[i];
+          let j = i - 1;
+
+          while (j >= 0 && key1 < auxArr[j]) {
+            auxArr[j + 1] = auxArr[j];
+            arr[j + 1] = arr[j];
+            j -= 1;
+          }
+
+          auxArr[j + 1] = key1;
+          arr[j + 1] = key2;
+        }
+      };
+
+      // function to sort according to bit count using an auxiliary array
+      const sortBySetBitCount = (arr) => {
+        // first sort input array to have numbers in order
+        insertionSort(arr);
+        // create an array and store count of set bits in it
+        const auxArr = arr.map((item) => {
+          const binaryNumber = item.toString(2);
+          return countBits(binaryNumber);
+        });
+
+        // sort arr[] according to values in auxArr[]
+        insertionSort(arr, auxArr);
+
+        return arr;
+      };
+
+      console.log(sortBySetBitCount(exampleArray));
+    </script>
+  </body>
+</html>

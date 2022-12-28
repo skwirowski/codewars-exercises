@@ -1,0 +1,42 @@
+{
+  "name": "codewars-exercises",
+  "version": "1.0.0",
+  "description": "My exercises from CodeWars",
+  "main": "script.js",
+  "repository": "https://github.com/skwirowski/Programming-Exercises",
+  "author": "Pawel Skwirowski",
+  "license": "MIT",
+  "scripts": {
+    "format:eslint": "eslint **/*.js --fix",
+    "format:prettier": "prettier **/*.js --write",
+    "format": "npm run format:eslint & npm run format:prettier",
+    "webpack": "webpack --config webpack.config.js",
+    "test": "npx karma start --single-run",
+    "test:debug": "npm karma start --browsers Chrome",
+    "test:watch": "npm karma start --auto-watch"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "eslint": "^7.7.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jasmine": "^4.1.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "jasmine-core": "^3.5.0",
+    "karma": "^6.0.0",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-jasmine": "^4.0.1",
+    "karma-mocha-reporter": "^2.2.5",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^5.0.0",
+    "prettier": "^2.0.5",
+    "webpack": "^5.0.0-rc.6",
+    "webpack-cli": "^4.4.0"
+  },
+  "dependencies": {}
+}

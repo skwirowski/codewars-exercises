@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Find all pairs</title>
+  </head>
+
+  <body>
+    <p>
+      <b>Description:</b>
+      <br />
+      <br />
+      You are given array of integers, your task will be to count all pairs in that array and return their count.
+    </p>
+    <p><b>NOTES:</b></p>
+    <ul>
+      <li>Array can be empty or contain only one value; in this case return 0</li>
+      <li>
+        If there are more pairs of a certain number, count each pair only once. E.g.: for [0, 0, 0, 0] the return value
+        is 2 (= 2 pairs of 0s)
+      </li>
+      <li>Random tests: maximum array length is 1000, range of values in array is between 0 and 1000</li>
+    </ul>
+    <p>
+      <b>Examples:</b>
+    </p>
+    <pre>
+    [1, 2, 5, 6, 5, 2] --> 2
+    ...because there are 2 pairs: 2 and 5
+  </pre
+    >
+    <pre>
+    [1, 2, 2, 20, 6, 20, 2, 6, 2] --> 4
+    ...because there are 4 pairs: 2, 20, 6 and 2 (again)
+  </pre
+    >
+
+    <script>
+      const exampleArray = [1, 2, 5, 6, 5, 2];
+
+      function duplicates(array) {
+        let arrayCopy = [...array];
+        let counter = 0;
+
+        for (let i = 0; i < arrayCopy.length; i = 0) {
+          const prevArrLength = arrayCopy.length;
+
+          arrayCopy = arrayCopy.filter((item) => item !== arrayCopy[i]);
+
+          const currArrLength = arrayCopy.length;
+          const pairsCount = Math.floor((prevArrLength - currArrLength) / 2);
+
+          counter += pairsCount;
+        }
+        return counter;
+      }
+
+      console.log(duplicates(exampleArray));
+
+      // Other solutions from CodeWars
+      //
+      //
+      // function duplicates(array) {
+      //   let res = 0, odd = new Set();
+      //   for (let x of array) {
+      //     if (odd.delete(x))
+      //       res++;
+      //     else
+      //       odd.add(x);
+      //   }
+      //   return res;
+      // }
+      //
+      //
+      // function duplicates(a) {
+      //   var count = 0;
+      //   a.sort((b, c) => b - c);
+      //   console.log(a)
+      //   for (var i = 0; i < a.length; ++i)
+      //     if (a[i] == a[i + 1]) {
+      //       count++;
+      //       ++i;
+      //     }
+      //   return count
+      // }
+    </script>
+  </body>
+</html>

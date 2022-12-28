@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Compare powers</title>
+  </head>
+  <body>
+    <p>
+      <b>Description:</b>
+      <br />
+      You certainly can tell which is the larger number between 2<sup>10</sup> and 2<sup>15</sup>.
+      <br />
+      But what about, say, 2<sup>10</sup> and 3<sup>10</sup>? You know this one too.
+      <br />
+      Things tend to get a bit more complicated with both different bases and exponents: which is larger between 3<sup
+        >9</sup
+      >
+      and 5<sup>6</sup>?
+      <br />
+      Well, by now you have surely guessed that you have to build a function to compare powers, returning:
+    </p>
+    <ul>
+      <li>-1 if the first member is larger,</li>
+      <li>0 if they are equal,</li>
+      <li>1 otherwise;</li>
+    </ul>
+    <p>Powers to compare will be provided in the <b>[base, exponent]</b> format:</p>
+    <pre>
+  comparePowers([2,10],[2,15])===1
+  comparePowers([2,10],[3,10])===1
+  comparePowers([2,10],[2,10])===0
+  comparePowers([3,9],[5,6])===-1
+  comparePowers([7,7],[5,8])===-1
+</pre
+    >
+    <p>
+      Only positive integers will be tested, incluing bigger numbers - you are warned now, so be diligent try to
+      implement an efficient solution not to drain too much on CW resources ;)!
+    </p>
+
+    <script>
+      // Method used in exercise uses formula log a (b ^ m) = m * log a (b)
+      // Example numbers
+      const num1 = [2, 10];
+      const num2 = [2, 15];
+      function comparePowers(n1, n2) {
+        const firstLog = Math.log(n1[0]) * n1[1];
+        const secondLog = Math.log(n2[0]) * n2[1];
+        if (firstLog > secondLog) return -1;
+        if (firstLog < secondLog) return 1;
+        return 0;
+      }
+      console.log(comparePowers(num1, num2));
+
+      // One of my solutions (doesn't work with large numbers with small greatest common divisor)
+      // /*
+      // * First method used in this exercise
+      // * Example numbers are: num1 = 2 ^ 2000, num2 = 10 ^ 800
+      // * Give num1 and num 2 the same exponent. We know that (a ^ n) ^ m = a ^ (n * m). Now, we can
+      // * restate the different bases but with the same exponent so they'll look like this: (2 ^ 5) ^ 400
+      // * and (10 ^ 2) ^ 400 and they are absolutely the same as the before ones.
+      // * 2 ^ 5 = 32 and 10 ^ 2 = 100 are easily calculated, so now we can say that 32 ^ 400 < 100 ^ 400
+      // */
+      //
+      // // Example numbers
+      // const num1 = [2, 2000];
+      // const num2 = [10, 800];
+      // // Find greatest common divisor
+      // const gcDivisor = (a, b) => {
+      //   if (!b) return a;
+      //   return gcDivisor(b, a % b);
+      // };
+      //
+      // function comparePowers(n1, n2) {
+      //   // Find common Exponent for n1 and n2
+      //   const cE = gcDivisor(n1[1], n2[1]);
+      //   // Find individual Exponents for n1 an n2
+      //   const iE = n => n[1] / cE;
+      //   const firstPower = n1[0] ** iE(n1);
+      //   const secondPower = n2[0] ** iE(n2);
+      //   // Check comparison conditions
+      //   if (firstPower > secondPower) return -1;
+      //   if (firstPower === secondPower) return 0;
+      //   return 1;
+      // }
+      // console.log(gcDivisor(num1[1], num2[1]));
+      // console.log(comparePowers(num1, num2));
+    </script>
+  </body>
+</html>

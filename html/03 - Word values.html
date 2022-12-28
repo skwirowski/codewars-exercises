@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Word values</title>
+  </head>
+  <body>
+    <p>
+      Given a string <b>"abc"</b> and assuming that each letter in the string has a value equal to its position in the
+      alphabet, our string will have a value of <b>1 + 2 + 3 = 6</b>. This means that:
+      <b>a = 1, b = 2, c = 3 ....z = 26</b>.<br /><br />
+
+      You will be given a list of strings and your task will be to return the values of the strings as explained above
+      multiplied by the position of that string in the list. For our purpose, position begins with 1.<br /><br />
+
+      <b>nameValue ["abc","abc abc"]</b> should return <b>[6,24]</b> because of <b>[ 6 * 1, 12 * 2 ]</b>. Note how
+      spaces are ignored.<br /><br />
+
+      <b>"abc"</b> has a value of <b>6</b>, while <b>"abc abc"</b> has a value of <b>12</b>. Now, the value at position
+      <b>1</b> is multiplied by <b>1</b> while the value at position <b>2</b> is multiplied by <b>2</b>.<br /><br />
+
+      Input will only contain lowercase characters and spaces.
+    </p>
+
+    <script>
+      changeWordsIntoValues = (array) => {
+        const changeStringIntoSingleCharactersArray = (_array) => {
+          const newArray = [];
+
+          for (let i = 0; i < _array.length; i += 1) {
+            const charactersArray = _array[i].split('');
+            newArray.push(charactersArray);
+          }
+          return newArray;
+        };
+
+        const removeSpaceCharacters = (_array) => {
+          const itemsArray = [];
+
+          for (let i = 0; i < _array.length; i += 1) {
+            const singleItemsArray = [];
+            const singleArrayItem = _array[i];
+
+            for (let j = 0; j < singleArrayItem.length; j += 1) {
+              if (singleArrayItem[j] !== ' ') {
+                singleItemsArray.push(singleArrayItem[j]);
+              }
+            }
+            itemsArray.push(singleItemsArray);
+          }
+          return itemsArray;
+        };
+
+        const changeLettersIntoNumbers = (_array) => {
+          const numbersArray = [];
+
+          for (let i = 0; i < _array.length; i += 1) {
+            const singleNumbersArray = [];
+
+            _array[i].map((letter) => {
+              const numberFromLetter = parseInt(letter, 36) - 9;
+              return singleNumbersArray.push(numberFromLetter);
+            });
+            numbersArray.push(singleNumbersArray);
+          }
+          return numbersArray;
+        };
+
+        const sumOfArrayItems = (_array) => {
+          const newArray = [];
+
+          for (let i = 0; i < _array.length; i += 1) {
+            const arraySum = _array[i].reduce((a, b) => a + b, 0);
+            const sumTimesIndex = arraySum * [i + 1];
+            newArray.push(sumTimesIndex);
+          }
+          return newArray;
+        };
+
+        const singleLettersArray = changeStringIntoSingleCharactersArray(array);
+        const singleLettersArrayWithNoSpaces = removeSpaceCharacters(singleLettersArray);
+        const arrayOfNumbers = changeLettersIntoNumbers(singleLettersArrayWithNoSpaces);
+        const sumOfArrayItemsTimesIndex = sumOfArrayItems(arrayOfNumbers);
+
+        return sumOfArrayItemsTimesIndex;
+      };
+
+      // My favorite solutions from codewars
+      // function wordValue(a) {
+      //   return a.map((s,i) => s.replace(/\s/g, '')
+      //     .split('')
+      //     .map(b => (b.charCodeAt()-96))
+      //     .reduce((acc, cur) => (acc+=cur),0)*(i+1));
+      //
+      // function wordValue(a) {
+      //   return a.map((string, stringIndex) =>
+      //     (+stringIndex + 1) * string.split('').reduce(
+      //     (prev, character) => character !== ' ' ? prev + character.charCodeAt(0) - 96 : prev,
+      //     0
+      //     )
+      //   );
+      // }
+      //
+      // function wordValue(a) {
+      //   return a.map((str, key) =>
+      //     ++key * str.split('').reduce(
+      //     (prev, char) => char !== ' ' ? prev + char.charCodeAt(0) - 96 : prev,
+      //     0
+      //     )
+      //   );
+      // }
+    </script>
+  </body>
+</html>
